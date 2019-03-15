@@ -1,4 +1,4 @@
-use <../lib/struct.scad>;
+use <struct.scad>;
 
 module roundedCuboid(xs,ys,zs,radius) {
     r = max(radius, 0.01);
