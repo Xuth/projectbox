@@ -24,6 +24,7 @@ box = [
 
 For a project box where you're placing multiple supports and overriding default parameters, you can easily have many dozens of parameters that become unwieldy to work with.
 
+# Now, how to use this library:
 For a quick start, 
 ```
 use <project_box_lib.scad>;
@@ -40,7 +41,8 @@ translate([0,0,10]) // since otherwise you won't see the edge of the box
 
 alternately look at demo_box.scad to see how I used this to make a project box for an actual project with a 50x70 protoboard and a smaller stepper motor controller board.
 
-# Now, how to use this library:
+More Details:
+
 First define the project box.  As shown above, the definition is a list of two element lists, each with a key and a value.  
 
 main box object structure:
