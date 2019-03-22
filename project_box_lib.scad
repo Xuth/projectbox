@@ -49,7 +49,15 @@ function genBossList(board) = [
 	    concat( [["x", x],
 		     ["y", y],
 		     ["h", v(board, "z")]], v(board, "extras", []))];
-	     
+
+module aboutFaceWall(box, wall) {
+    faceWall(box, wall) {
+	mirror([0,0,1]) {
+	    children();
+	}
+    }
+}
+
 module faceWall(box, wall) {
     x = v(box, "x");
     y = v(box, "y");
