@@ -65,7 +65,7 @@ module baseRoundedBoxLid(boxDef) {
 		roundedCuboid(x,y,z+extraDepth, radius);
 	    }
 	    translate([wallLip, wallLip, -extraDepth]) {
-		roundedCuboid(x-wallLip*2, y-wallLip*2, z+extraDepth-wallLip, radius-wallLip);
+		roundedCuboid(x-wallLip*2, y-wallLip*2, z+extraDepth-wall, radius-wallLip);
 	    }
 	    difference() {
 		translate([-1, -1, -extraDepth-1]) {
