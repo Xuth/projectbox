@@ -21,11 +21,14 @@ box = [
 		       ["offset", 50]]]],
     ];
 ```
-
+and reference it with something like:
+```
+lidHeight = v(box, "lidZ");
+```
 For a project box where you're placing multiple supports and overriding default parameters, you can easily have many dozens of parameters that become unwieldy to work with.
 
 # Now, how to use this library:
-For a quick start, 
+For a quick start, include the project box library:
 ```
 use <project_box_lib.scad>;
 ```
