@@ -15,15 +15,23 @@ module roundedCuboid(xs,ys,zs,radius) {
 }
 
 module roundedEdge(xs, ys, zs, radius) {
+    r = max(radius, 0.01);
+    
     hull() {
-	for (x = [radius, xs-radius]) {
-	    for (y = [radius, ys-radius]) {
-		translate([x,y,0]) cylinder(r=radius, h=zs);
+	for (x = [r, xs-r]) {
+	    for (y = [r, ys-r]) {
+		translate([x,y,0]) cylinder(r=r, h=zs);
 	    }
 	}
     }
 }
 
+module cuboidChoice(boxDef, xs, ys, zs, radius) {
+    if (v(boxDef, "edgeOnly", 0))
+	roundedEdge(xs, ys, zs, radius);
+    else
+	roundedCuboid(xs, ys, zs, radius);
+}
 
 module baseRoundedBox(boxDef) {
     x = v(boxDef, "x");
@@ -34,9 +42,9 @@ module baseRoundedBox(boxDef) {
     
     extraHeight = radius * 2;
     difference() {
-	roundedCuboid(x,y,z+extraHeight, radius);
+	cuboidChoice(boxDef, x,y,z+extraHeight, radius);
 	translate([wall, wall, wall]) {
-	    roundedCuboid(x-wall*2, y-wall*2, z-wall*2 + extraHeight, radius-wall);
+	    cuboidChoice(boxDef, x-wall*2, y-wall*2, z-wall*2 + extraHeight, radius-wall);
 	}
 	translate([-1,-1, z]) {
 	    cube([x+2, y+2, extraHeight+1]);
@@ -62,10 +70,10 @@ module baseRoundedBoxLid(boxDef) {
     translate([0,0,lidZ]) {
 	difference() {
 	    translate([0,0,-extraDepth]) {
-		roundedCuboid(x,y,z+extraDepth, radius);
+		cuboidChoice(boxDef, x,y,z+extraDepth, radius);
 	    }
 	    translate([wallLip, wallLip, -extraDepth]) {
-		roundedCuboid(x-wallLip*2, y-wallLip*2, z+extraDepth-wall, radius-wallLip);
+		cuboidChoice(boxDef, x-wallLip*2, y-wallLip*2, z+extraDepth-wall, radius-wallLip);
 	    }
 	    difference() {
 		translate([-1, -1, -extraDepth-1]) {
@@ -92,7 +100,7 @@ module roundedBoxLid(boxDef) {
 
 //$fn=30;
 
-box = [
+testBox = [
     ["x", 30],
     ["y", 40],
     ["z", 25],
@@ -105,7 +113,7 @@ box = [
     ];
 
 
-roundedBox(box);
+roundedBox(testBox);
 
 translate([0,0,10])
-roundedBoxLid(box);
+roundedBoxLid(testBox);

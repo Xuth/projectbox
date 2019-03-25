@@ -20,7 +20,6 @@ function addCoreBoxDefs(boxDef) =
 	       ]);
 
 module addBoss(box, boss) {
-    echo(boss);
     x = v(boss, "x");
     y = v(boss, "y");
     z = v(box, "wall");
@@ -98,8 +97,7 @@ module addOuterLidScrew(boxDef, lidScrew) {
     wall = v(lidScrew, "wall"); 
     x = v(lidScrew, "offset");
     vOffset = v(lidScrew, "vOffset", v(boxDef, "lidScrew_vOffset", "wtf"));
-    echo(vOffset);
-    y = v(box, "lidZ") - vOffset;
+    y = v(boxDef, "lidZ") - vOffset;
     screwR = v(lidScrew, "radius", v(boxDef, "lidScrew_radius"));
     eps = v(boxDef, "epsilon");
     h = v(boxDef, "wall");
@@ -168,8 +166,6 @@ module screwFlanges(box, flangeInset) {
 	    cube([v(box, "x"), v(box, "y"), mfd - lh + 1]);
 	}
 	for (ls = v(box, "lidScrewList", [])) {
-	    echo(ls);
-	    echo(flangeInset);
 	    addLidScrewFlange(box, ls, flangeInset);
 	}
     }
@@ -223,7 +219,7 @@ lidScrew1 = [
 lidScrew2 = concat([["wall", 2]], lidScrew1);
 
 
-box = [
+testBox = [
     ["x", 50],
     ["y", 70],
     ["z", 25],
@@ -232,6 +228,6 @@ box = [
     ["lidScrewList", [lidScrew1, lidScrew2]]
     ];
 
-projectBox(box);
+projectBox(testBox);
 translate([0,0,15])
-projectBoxLid(box);
+projectBoxLid(testBox);
